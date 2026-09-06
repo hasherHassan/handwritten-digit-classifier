@@ -72,19 +72,14 @@ handwritten-digit-classifier/
     ├── Digit.java
     ├── HandwrittenDigitClassifier.java
     └── Perceptron.java
-Compile
-javac -cp acm.jar -d out src/Digit.java src/Perceptron.java src/HandwrittenDigitClassifier.java
-Run on macOS or Linux
-java -cp "out:acm.jar" HandwrittenDigitClassifier
-Run on Windows
-java -cp "out;acm.jar" HandwrittenDigitClassifier
-
+    
 After the application opens:
 
 Wait for the model to finish training.
 Draw a digit by dragging the mouse across the canvas.
 Click Predict to classify the drawing.
 Click Clear to reset the canvas.
+
 Limitations
 The model only distinguishes zero from nonzero digits.
 The displayed percentage is training accuracy, not accuracy measured using a separate testing dataset.
