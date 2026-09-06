@@ -1,38 +1,35 @@
 # handwritten-digit-classifier
-A Java application that trains a perceptron to classify a hand-drawn 28×28 image as either zero or not zero.
 
-Features
-Interactive 28×28 pixel drawing interface
-Perceptron machine-learning algorithm implemented from scratch
-Training from labeled handwritten-digit data
-Five randomized training epochs
-Training-accuracy calculation
-Mouse-drag drawing
-Predict and Clear controls
+A Java application that uses a perceptron to classify a hand-drawn 28×28 image as either zero or not zero. Users draw on an interactive pixel grid, and the trained model processes the drawing to produce a binary prediction.
 
-How It Works
-Each handwritten image is represented by 784 grayscale values—one value for every pixel in the 28×28 image.
+## Features
 
-The perceptron calculates a weighted sum:
-weighted sum = weight₁ × pixel₁ + weight₂ × pixel₂ + ... + weight₇₈₄ × pixel₇₈₄
+* Interactive 28×28 pixel drawing interface
+* Perceptron machine-learning algorithm implemented from scratch
+* Training using labeled handwritten-digit data
+* Five randomized training epochs
+* Training-accuracy calculation
+* Mouse-drag drawing
+* Predict and Clear controls
 
-The program performs binary classification:
-1 represents a zero
--1 represents a digit that is not zero
+## Machine-Learning Design
 
-If the perceptron makes an incorrect prediction during training, its weights are updated using:
+* Each handwritten image is represented by 784 grayscale pixel values.
+* The perceptron stores one weight for each pixel.
+* A weighted sum is calculated using the image’s pixel values and the model’s weights.
+* The value `1` represents a zero.
+* The value `-1` represents a digit that is not zero.
+* Weights are updated whenever the model makes an incorrect prediction.
+
+The weight-update formula is:
+
+```text
 weight = weight + (actual label × pixel value)
+```
 
-After training, users can draw a digit on the canvas and ask the program to predict whether it is a zero.
+## Project Structure
 
-Technologies
-Java
-Stanford ACM Graphics Library
-Java Swing
-Java AWT
-CSV data processing
-Perceptron machine learning
-Project Structure
+```text
 handwritten-digit-classifier/
 ├── README.md
 ├── .gitignore
@@ -40,51 +37,48 @@ handwritten-digit-classifier/
     ├── Digit.java
     ├── HandwrittenDigitClassifier.java
     └── Perceptron.java
-    
-Dataset Format
-The program expects an MNIST-formatted CSV file at:
+```
 
-data/mnist_train.csv
+## Technologies
 
-Each row must contain a digit label followed by 784 grayscale pixel values:
+* Java
+* Stanford ACM Graphics Library
+* Java Swing
+* Java AWT
+* CSV data processing
+* Perceptron machine learning
 
+## Dataset Format
+
+* The program expects an MNIST-formatted CSV file at `data/mnist_train.csv`.
+* Each row begins with a digit label followed by 784 grayscale pixel values.
+* Labels range from 0 through 9.
+* Pixel values range from 0 through 255.
+* The program trains using the first 1,000 valid images.
+* The training dataset is not included in this repository.
+
+Each CSV row should follow this format:
+
+```text
 label,pixel1,pixel2,...,pixel784
+```
 
-The label is a number from 0 through 9. Each pixel value ranges from 0 to 255.
+## Controls
 
-The dataset is not included in this repository. The program reads the first 1,000 valid images from the provided CSV file.
+* Drag the mouse across the grid to draw a digit.
+* Click **Predict** to classify the drawing as zero or not zero.
+* Click **Clear** to reset the drawing grid.
+* Wait for the model to finish training before making a prediction.
 
-Running the Project
-Requirements
-Java 8 or newer
-Stanford ACM Java library (acm.jar)
-An MNIST-formatted training CSV
+## Current Limitations
 
-Place acm.jar in the project’s main folder. Create a folder named data and place the dataset inside it as mnist_train.csv.
+* The model only distinguishes zero from nonzero digits.
+* The displayed percentage represents training accuracy rather than accuracy on a separate testing dataset.
+* Hand-drawn input may differ from the position, size, and stroke style of the training images.
+* A basic perceptron cannot learn every type of nonlinear pattern.
+* The ACM Java library and an MNIST-formatted CSV file are required to run the project.
 
-The completed structure should look like:
+## Project History
 
-handwritten-digit-classifier/
-├── acm.jar
-├── data/
-│   └── mnist_train.csv
-└── src/
-    ├── Digit.java
-    ├── HandwrittenDigitClassifier.java
-    └── Perceptron.java
-    
-After the application opens:
+This project was originally developed during high school as a Java machine-learning exercise. It demonstrates perceptron training, binary classification, array processing, CSV data loading, graphical input, and event handling. After access to the original CodeHS account was lost, the project was reconstructed from surviving source-code excerpts and notes. The original perceptron algorithm, training approach, drawing-grid design, and classification logic were preserved, while missing setup and error-handling code was restored.
 
-Wait for the model to finish training.
-Draw a digit by dragging the mouse across the canvas.
-Click Predict to classify the drawing.
-Click Clear to reset the canvas.
-
-Limitations
-The model only distinguishes zero from nonzero digits.
-The displayed percentage is training accuracy, not accuracy measured using a separate testing dataset.
-Hand-drawn input may differ from the size, position, and stroke style of the training images.
-A basic perceptron cannot learn every type of nonlinear pattern.
-
-Project History
-This project was originally developed during high school using Java and the Stanford ACM Graphics Library. After access to the original CodeHS account was lost, the project was reconstructed from surviving source-code excerpts and notes. The original perceptron algorithm, training approach, drawing-grid design, and classification logic were preserved, while missing setup and error-handling code was restored.
